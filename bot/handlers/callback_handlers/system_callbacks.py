@@ -15,7 +15,7 @@ async def handle_bleu_check(callback_query: CallbackQuery, state: FSMContext):
 
     keyboard = await Menu.start()
     new_message = await callback_query.message.answer(
-        text="👋 Добро пожаловать в IOT Security Monitor!",
+        text="👋 Добро пожаловать в IoT Security Monitor!",
         reply_markup=keyboard
     )
 

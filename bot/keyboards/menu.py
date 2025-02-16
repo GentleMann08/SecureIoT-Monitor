@@ -39,3 +39,17 @@ class Menu:
         
         keyboard = await KeyboardOperations.create_base_keyboard(buttons=buttons_dict)
         return keyboard
+    
+    @staticmethod
+    async def example_reaction():
+        buttons_dict = {
+            "😷 Изолировать устройство": "example_reaction",
+            "🔍 Узнать подробности атаки": "example_reaction",
+            "🚫 Игнорировать (не рекомендуется)": "to_start",
+            "🛡️ Проверить безопасность": "example_reaction",
+            "📊 Показать статистику": "example_reaction",
+            "⚙️ Настройки уведомлений": "example_reaction"
+        }
+        
+        keyboard = await KeyboardOperations.create_base_keyboard(buttons=buttons_dict)
+        return keyboard
