@@ -21,7 +21,7 @@ text = f"""
 """
 
 @example_router.message(Command("example"))
-async def start_handler(message: Message, bot: Bot, state: FSMContext):
+async def example(message: Message, bot: Bot, state: FSMContext):
     chat = message.chat.id
 
     keyboard = await Menu.example_reaction()
