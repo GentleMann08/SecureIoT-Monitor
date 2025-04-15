@@ -1,7 +1,8 @@
 from PyQt5.QtWidgets import QFrame, QVBoxLayout, QWidget
-from ui.notification import NotificationBlock
-from ui.search_block import SearchBlock
 from PyQt5.QtCore import Qt
+from ui.search_block import SearchBlock
+from ui.notification import NotificationBlock
+from database.db import get_notifications
 
 
 class Content(QFrame):
@@ -19,11 +20,8 @@ class Content(QFrame):
         self.notifications_layout.setContentsMargins(30, 0, 0, 0)
         self.notifications_layout.setSpacing(10)
 
-        for title, time in [
-            ("Обнаружено подозрительное устройство", "Системное уведомление • 3 мин назад"),
-            ("Новая активность в кластере 2", "Системное уведомление • 2 мин назад")
-        ]:
-            self.notifications_layout.addWidget(NotificationBlock(title, time))
+        for title, time_info in get_notifications():
+            self.notifications_layout.addWidget(NotificationBlock(title, time_info))
 
         container = QWidget()
         container.setLayout(self.notifications_layout)

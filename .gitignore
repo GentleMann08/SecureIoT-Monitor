@@ -1,3 +1,4 @@
 bot/settings.py
 *.pyc
 .DS_Store
+*.db
