@@ -14,7 +14,6 @@ class FramelessMainWindow(QMainWindow):
         self.setGeometry(100, 100, 1000, 600)
         self.setWindowFlags(Qt.FramelessWindowHint)
 
-        # Устанавливаем иконку окна
         icon_path = os.path.join(os.path.dirname(__file__), "assets", "logo.ico")
         self.setWindowIcon(QIcon(icon_path))
         

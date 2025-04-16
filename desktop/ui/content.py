@@ -1,10 +1,9 @@
 from PyQt5.QtWidgets import QFrame, QVBoxLayout, QHBoxLayout, QWidget, QPushButton, QScrollArea
-from PyQt5.QtCore import Qt
+from PyQt5.QtCore import Qt, QTimer
 from .search_block import SearchBlock
 from .notification import NotificationBlock
 from database.db import get_notifications, clear_notifications
 from styles.stylesheet import CUSTOM_SCROLLBAR, BUTTON_STYLE
-
 
 class Content(QFrame):
     def __init__(self):
@@ -47,12 +46,16 @@ class Content(QFrame):
         self.setLayout(layout)
         self.load_notifications()
 
+        self.timer = QTimer(self)
+        self.timer.timeout.connect(self.load_notifications)
+        self.timer.start(10000)
+
     def load_notifications(self):
         for i in reversed(range(self.notifications_layout.count())):
             self.notifications_layout.itemAt(i).widget().setParent(None)
-        for title, time_info, ip, extra in get_notifications():
+        for title, time_info, ip, extra, created_at in get_notifications():
             self.notifications_layout.addWidget(
-                NotificationBlock(title, time_info, ip, extra)
+                NotificationBlock(title, ip, extra, created_at)
             )
 
     def clear_notifications(self):
