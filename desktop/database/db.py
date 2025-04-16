@@ -23,7 +23,7 @@ def init_db():
 def get_notifications():
     with sqlite3.connect(DB_PATH) as conn:
         cursor = conn.cursor()
-        cursor.execute("SELECT title, time_info FROM notifications ORDER BY id DESC")
+        cursor.execute("SELECT title, time_info, ip_address, extra FROM notifications ORDER BY id DESC")
         return cursor.fetchall()
 
 
@@ -35,3 +35,10 @@ def add_notification(title, time_info, ip_address=None, extra=None):
             VALUES (?, ?, ?, ?)
         """, (title, time_info, ip_address, extra))
         conn.commit()
+
+def clear_notifications():
+    conn = sqlite3.connect(DB_PATH)
+    cursor = conn.cursor()
+    cursor.execute("DELETE FROM notifications")
+    conn.commit()
+    conn.close()

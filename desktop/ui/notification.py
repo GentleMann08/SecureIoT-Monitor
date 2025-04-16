@@ -1,9 +1,10 @@
 from PyQt5.QtWidgets import QFrame, QVBoxLayout, QLabel, QSizePolicy
 from PyQt5.QtCore import Qt
+from ui.notification_details import NotificationDetailsWindow
 
 
 class NotificationBlock(QFrame):
-    def __init__(self, title, time_info):
+    def __init__(self, title, time_info, ip_address=None, extra=None):
         super().__init__()
         self.setStyleSheet("background-color: white; border: 1px solid #ccc; border-radius: 6px;")
         layout = QVBoxLayout()
@@ -23,3 +24,14 @@ class NotificationBlock(QFrame):
         self.setLayout(layout)
         self.setMaximumWidth(480)
         self.setSizePolicy(QSizePolicy.Fixed, QSizePolicy.MinimumExpanding)
+
+        self.title = title
+        self.time_info = time_info
+        self.ip_address = ip_address
+        self.extra = extra
+
+        self.mousePressEvent = self.on_click
+
+    def on_click(self, event):
+        details_window = NotificationDetailsWindow(self.title, self.time_info, self.ip_address, self.extra)
+        details_window.exec_()

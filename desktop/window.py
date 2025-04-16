@@ -4,7 +4,8 @@ from ui.sidebar import Sidebar
 from ui.content import Content
 from widgets.window_controls import WindowControls
 from PyQt5.QtCore import Qt
-
+from PyQt5.QtGui import QIcon
+import os
 
 class FramelessMainWindow(QMainWindow):
     def __init__(self):
@@ -13,6 +14,10 @@ class FramelessMainWindow(QMainWindow):
         self.setGeometry(100, 100, 1000, 600)
         self.setWindowFlags(Qt.FramelessWindowHint)
 
+        # Устанавливаем иконку окна
+        icon_path = os.path.join(os.path.dirname(__file__), "assets", "logo.ico")
+        self.setWindowIcon(QIcon(icon_path))
+        
         self.offset = None
 
         main_widget = QWidget()
