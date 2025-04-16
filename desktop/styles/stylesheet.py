@@ -75,3 +75,18 @@ BUTTON_STYLE = """
     }
 """
 
+DARK_BUTTON_STYLE = """
+    QPushButton {
+        background-color: #3a3a3a;
+        color: #ffffff;
+        border: 1px solid #555;
+        border-radius: 5px;
+        padding: 6px 12px;
+    }
+    QPushButton:hover {
+        background-color: #505050;
+    }
+    QPushButton:pressed {
+        background-color: #2a2a2a;
+    }
+"""
