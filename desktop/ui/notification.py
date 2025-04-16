@@ -1,8 +1,10 @@
 from PyQt5.QtWidgets import QFrame, QVBoxLayout, QLabel, QSizePolicy
-from PyQt5.QtCore import Qt, QDateTime, QTimer
+from PyQt5.QtCore import Qt, QDateTime, QTimer, pyqtSignal
 from ui.notification_details import NotificationDetailsWindow
 
 class NotificationBlock(QFrame):
+    notification_deleted = pyqtSignal(str)
+
     def __init__(self, title, ip_address=None, extra=None, created_at=None):
         super().__init__()
         self.setStyleSheet("background-color: white; border: 1px solid #ccc; border-radius: 6px;")
@@ -48,5 +50,6 @@ class NotificationBlock(QFrame):
                 self.time_label.setText(f"{time_diff // 60} минут назад")
 
     def on_click(self, event):
-        details_window = NotificationDetailsWindow(self.title, self.time_label.text(), self.ip_address, self.extra)
+        details_window = NotificationDetailsWindow(self.title, self.created_at, self.ip_address, self.extra)
+        details_window.notification_deleted.connect(self.notification_deleted)
         details_window.exec_()

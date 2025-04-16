@@ -90,3 +90,4 @@ DARK_BUTTON_STYLE = """
         background-color: #2a2a2a;
     }
 """
+

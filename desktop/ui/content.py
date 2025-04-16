@@ -54,9 +54,17 @@ class Content(QFrame):
         for i in reversed(range(self.notifications_layout.count())):
             self.notifications_layout.itemAt(i).widget().setParent(None)
         for title, time_info, ip, extra, created_at in get_notifications():
-            self.notifications_layout.addWidget(
-                NotificationBlock(title, ip, extra, created_at)
-            )
+            notification_block = NotificationBlock(title, ip, extra, created_at)
+            notification_block.notification_deleted.connect(self.remove_notification)
+            self.notifications_layout.addWidget(notification_block)
+
+    def remove_notification(self, title):
+        for i in reversed(range(self.notifications_layout.count())):
+            widget = self.notifications_layout.itemAt(i).widget()
+            if isinstance(widget, NotificationBlock) and widget.title == title:
+                self.notifications_layout.removeWidget(widget)
+                widget.setParent(None)
+                break
 
     def clear_notifications(self):
         clear_notifications()

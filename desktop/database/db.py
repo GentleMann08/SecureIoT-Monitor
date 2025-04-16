@@ -41,3 +41,9 @@ def clear_notifications():
     cursor.execute("DELETE FROM notifications")
     conn.commit()
     conn.close()
+
+def delete_notification_by_title(title):
+    with sqlite3.connect(DB_PATH) as conn:
+        cursor = conn.cursor()
+        cursor.execute("DELETE FROM notifications WHERE title = ?", (title,))
+        conn.commit()

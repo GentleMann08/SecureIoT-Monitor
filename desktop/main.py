@@ -3,8 +3,7 @@ import os
 from PyQt5.QtWidgets import QApplication
 from PyQt5.QtGui import QIcon
 from window import FramelessMainWindow
-from database.db import init_db, add_notification
-from PyQt5.QtGui import QPixmap
+from database.db import init_db, add_notification   
 
 def main():
     init_db()
