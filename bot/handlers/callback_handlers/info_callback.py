@@ -41,11 +41,11 @@ async def info(callback_query: CallbackQuery, state: FSMContext):
     data = await state.get_data()
     last_message_id = data.get("last_message_id")
 
-    if last_message_id:
-        await callback_query.message.chat.delete_message(message_id=last_message_id)
+    # if last_message_id:
+    #     await callback_query.message.chat.delete_message(message_id=last_message_id)
 
     keyboard = await Menu.info()
-    new_message = await callback_query.message.answer(
+    new_message = await callback_query.message.edit_text(
         text="❓ Про что Вы хотите узнать?",
         reply_markup=keyboard
     )
@@ -78,11 +78,8 @@ async def project_info(callback_query: CallbackQuery, state: FSMContext):
     data = await state.get_data()
     last_message_id = data.get("last_message_id")
 
-    if last_message_id:
-        await callback_query.message.chat.delete_message(message_id=last_message_id)
-
     keyboard = await Menu.to_info()
-    last_messafe = await callback_query.message.answer(
+    last_messafe = await callback_query.message.edit_text(
         text=project_info_text,
         reply_markup=keyboard
         )
@@ -94,11 +91,8 @@ async def testing(callback_query: CallbackQuery, state: FSMContext):
     data = await state.get_data()
     last_message_id = data.get("last_message_id")
 
-    if last_message_id:
-        await callback_query.message.chat.delete_message(message_id=last_message_id)
-
     keyboard = await Menu.to_info()
-    last_messafe = await callback_query.message.answer(
+    last_messafe = await callback_query.message.edit_text(
         text=testing_text,
         reply_markup=keyboard
         )

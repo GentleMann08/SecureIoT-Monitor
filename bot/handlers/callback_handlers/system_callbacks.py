@@ -10,11 +10,8 @@ async def to_start(callback_query: CallbackQuery, state: FSMContext):
     data = await state.get_data()
     last_message_id = data.get("last_message_id")
 
-    if last_message_id:
-        await callback_query.message.chat.delete_message(message_id=last_message_id)
-
     keyboard = await Menu.start()
-    new_message = await callback_query.message.answer(
+    new_message = await callback_query.message.edit_text(
         text="👋 Добро пожаловать в IoT Security Monitor!",
         reply_markup=keyboard
     )

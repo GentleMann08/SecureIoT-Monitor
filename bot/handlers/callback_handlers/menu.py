@@ -14,11 +14,8 @@ async def menu(callback_query: CallbackQuery, state: FSMContext):
     data = await state.get_data()
     last_message_id = data.get("last_message_id")
 
-    if last_message_id:
-        await callback_query.message.chat.delete_message(message_id=last_message_id)
-
     keyboard = await Menu.menu()
-    last_messafe = await callback_query.message.answer(
+    last_messafe = await callback_query.message.edit_text(
         text=text,
         reply_markup=keyboard
         )
@@ -31,11 +28,8 @@ async def join(callback_query: CallbackQuery, state: FSMContext):
     data = await state.get_data()
     last_message_id = data.get("last_message_id")
 
-    if last_message_id:
-        await callback_query.message.chat.delete_message(message_id=last_message_id)
-
     keyboard = await Menu.to_start()
-    last_messafe = await callback_query.message.answer(
+    last_messafe = await callback_query.message.edit_text(
         text= '❗ Запись на тестирование приостановлена',
         reply_markup=keyboard
         )
